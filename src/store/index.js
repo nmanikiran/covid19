@@ -5,6 +5,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    isOpenBurger: false,
     navLinks: [
       { title: "WHO", icon: "mdi-alpha-w-circle-outline", path: "WHO" },
       { title: "Symptoms", icon: "mdi-format-list-checkbox", path: "symptoms" },
@@ -168,9 +169,19 @@ export default new Vuex.Store({
       }
     ]
   },
-  mutations: {},
+  mutations: {
+    toggleNavigationDrawer(state, payload) {
+      if (payload === undefined) {
+        payload = !state.isOpenBurger;
+      }
+      Vue.set(state, "isOpenBurger", payload);
+    }
+  },
   actions: {},
   getters: {
+    isOpenBurger(state) {
+      return state.isOpenBurger;
+    },
     navigationLinks(state) {
       return state.navLinks;
     },

@@ -1,5 +1,12 @@
 <template>
-  <v-navigation-drawer :value="drawer" color="primary" temporary app dark>
+  <v-navigation-drawer
+    v-model="isOpen"
+    color="primary"
+    temporary
+    app
+    dark
+    :stateless="!isOpen"
+  >
     <v-layout column justify-space-between class="drawer-container">
       <div>
         <v-layout justify-center class="pa-5 my-5">
@@ -25,7 +32,6 @@
       <div>
         <v-list-item
           two-line
-          :class="miniVariant && 'px-0'"
           href="https://github.com/nmanikiran"
           target="_blank"
         >
@@ -61,7 +67,15 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["navigationLinks"])
+    ...mapGetters(["navigationLinks", "isOpenBurger"]),
+    isOpen: {
+      get() {
+        return this.isOpenBurger;
+      },
+      set(val) {
+        this.$store.commit("toggleNavigationDrawer", val);
+      }
+    }
   },
   methods: {}
 };

@@ -32,3 +32,36 @@ if (process.env.NODE_ENV === "production") {
     }
   });
 }
+window.isUpdateAvailable = new Promise(function(resolve, reject) {
+  // lazy way of disabling service workers while developing
+  if (
+    "serviceWorker" in navigator &&
+    ["localhost", "8080"].indexOf(location.hostname) === -1
+  ) {
+    // register service worker file
+    navigator.serviceWorker
+      .register("service-worker.js")
+      .then((reg) => {
+        reg.onupdatefound = () => {
+          const installingWorker = reg.installing;
+          installingWorker.onstatechange = () => {
+            switch (installingWorker.state) {
+              case "installed":
+                if (navigator.serviceWorker.controller) {
+                  // new update available
+                  resolve(true);
+                } else {
+                  // no update available
+                  resolve(false);
+                }
+                break;
+            }
+          };
+        };
+      })
+      .catch((err) => {
+        console.error("[SW ERROR]", err);
+        reject(err);
+      });
+  }
+});

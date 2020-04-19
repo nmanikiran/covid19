@@ -39,7 +39,7 @@ export default {
   },
   methods: {
     toggleMenu() {
-      this.$emit("input");
+      this.$store.commit("toggleNavigationDrawer");
     }
   }
 };

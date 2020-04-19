@@ -1,21 +1,34 @@
 <template>
   <div id="app">
     <v-app id="inspire">
-      <NavBar @input="toggleMenu" />
+      <NavBar />
       <v-container>
-        <NavigationDrawer :drawer="drawer" @input="toggleMenu" />
+        <NavigationDrawer />
         <v-content>
           <router-view></router-view>
         </v-content>
       </v-container>
       <v-layout justify-end v-if="isShareSupported">
         <v-fab-transition>
-          <v-btn color="primary" fab large dark bottom right class="share-icon">
+          <v-btn
+            color="primary"
+            fab
+            large
+            dark
+            bottom
+            right
+            class="share-icon"
+            @click="shareLink"
+          >
             <v-icon> mdi-share</v-icon>
           </v-btn>
         </v-fab-transition>
       </v-layout>
       <Footer />
+      <v-snackbar v-if="notification.message" v-model="showSnackbar">
+        {{ notification.message }}
+        <v-btn @click="closeNotification">Ok</v-btn>
+      </v-snackbar>
     </v-app>
   </div>
 </template>
@@ -29,7 +42,8 @@ export default {
   name: "App",
   data() {
     return {
-      drawer: false
+      notification: {},
+      showSnackbar: false
     };
   },
   computed: {
@@ -38,22 +52,37 @@ export default {
     }
   },
   methods: {
-    toggleMenu() {
-      this.drawer = !this.drawer;
+    closeNotification() {
+      this.showSnackbar = false;
+      this.notification = {};
+      window.location.reload(true);
     },
-    share() {
+    async shareLink() {
       let shareData = {
         title: "Covid19 Info",
         text:
           "gocovid19 site will provide stats relate to coronavirus cases, information that WHO provided to finght aganist covoid19 in pictorial reprasentation, symptoms checklist and many more",
-        url: "https://gocovid19.netlify.app/"
+        url: "https://gocovid19.netlify.app"
       };
 
-      window.navigator
-        .share(shareData)
-        .then(() => console.log("gocovid19 shared successfully"))
-        .catch(console.log);
+      try {
+        await navigator.share(shareData);
+        console.log("gocovid19 shared successfully");
+      } catch (error) {
+        console.log(error);
+        alert("Error while shareing");
+      }
     }
+  },
+  mounted() {
+    window["isUpdateAvailable"].then((isAvailable) => {
+      if (isAvailable) {
+        this.notification = {
+          message:
+            "New Update available! Reload the webapp to see the latest juicy changes."
+        };
+      }
+    });
   },
   components: {
     NavBar,

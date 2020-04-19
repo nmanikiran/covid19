@@ -1,7 +1,7 @@
 <template>
   <v-layout column class="symptoms-page">
     <h1>COVID-19 Symptoms Checklist</h1>
-    <p class="note">Score 1 to 3 points for each question</p>
+    <p class="text--secondary">Score 1 to 3 points for each question</p>
     <v-list rounded>
       <v-list-item
         v-for="(item, index) in symptomsChecklist"
@@ -34,8 +34,13 @@
     </v-list>
     <div class="results my-5">
       <h1>Score Results</h1>
-      <div v-html="result" v-if="result"></div>
-      <p class="note" v-else>
+
+      <v-alert class="my-3" v-if="results.text" :type="results.type">
+        <p>Your Covid19 Symptoms results as follows</p>
+        <p v-html="results.text"></p>
+      </v-alert>
+
+      <p class="text--secondary" v-else>
         No Result yet! Please select the above symptoms to check the score
       </p>
     </div>
@@ -46,12 +51,6 @@
         <a href="https://www.doh.gov.ph/">doh.gov.ph</a>
       </div>
     </div>
-    <v-snackbar v-model="snackbar" color="error" right :timeout="22500" top>
-      <p v-html="result"></p>
-      <v-btn dark icon @click="snackbar = false">
-        <v-icon>mdi-close</v-icon>
-      </v-btn>
-    </v-snackbar>
   </v-layout>
 </template>
 
@@ -137,7 +136,7 @@ export default {
         }
       ],
       poweredBy: `${ImageUrl}/doh.png`,
-      result: ""
+      results: {}
     };
   },
   methods: {
@@ -149,19 +148,22 @@ export default {
         .reduce((sum, acc) => {
           return sum + acc.points;
         }, 0);
-      console.log(totalPoints);
       if (totalPoints > 0 && totalPoints < 3) {
-        this.result = `<b> 0 - 2</b> May be stress realted or observe`;
+        this.results.type = "success";
+        this.results.text = `<b> 0 - 2</b> May be stress realted or observe`;
       }
       if (totalPoints >= 3 && totalPoints < 6) {
-        this.result = `<b> 3 - 5 </b> Hydrate properly with personal hygiene Observe and Re-evaluate afte 2 days`;
+        this.results.type = "info";
+        this.results.text = `<b> 3 - 5 </b> Hydrate properly with personal hygiene Observe and Re-evaluate afte 2 days`;
       }
       if (totalPoints >= 6 && totalPoints < 13) {
-        this.result = `<b> 6 - 12</b> seek a consultation with doctor`;
+        this.results.type = "warning";
+        this.results.text = `<b> 6 - 12</b> seek a consultation with doctor`;
       }
       if (totalPoints >= 12 && totalPoints <= 20) {
         this.snackbar = true;
-        this.result = `<b> 12 - 20</b> Call the DOH helpline <a href="tel:02-8-651-7800">02-8-651-7800</a>`;
+        this.results.type = "error";
+        this.results.text = `<b> 12 - 20</b> Call the DOH helpline <a href="tel:02-8-651-7800">02-8-651-7800</a>`;
       }
     }
   }

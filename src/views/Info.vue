@@ -1,7 +1,7 @@
 <template>
   <v-layout column>
     <h1>The Buzz in the internet</h1>
-    <p class="note" v-if="isSpeachSupported">
+    <p class="text--secondary" v-if="isSpeachSupported">
       Tap on each buzz word to know more
     </p>
     <div class="my-3">

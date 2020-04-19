@@ -34,7 +34,7 @@ export default {
   },
   computed: {
     isShareSupported() {
-      return navigator.share;
+      return window.navigator.share;
     }
   },
   methods: {
@@ -43,15 +43,15 @@ export default {
     },
     share() {
       let shareData = {
-        title: "Mani kiran N",
+        title: "Covid19 Info",
         text:
-          "Restorative | Deliberative | Learner | Achiever | Responsibility!",
-        url: window.location.href
+          "gocovid19 site will provide stats relate to coronavirus cases, information that WHO provided to finght aganist covoid19 in pictorial reprasentation, symptoms checklist and many more",
+        url: "https://gocovid19.netlify.app/"
       };
 
-      navigator
+      window.navigator
         .share(shareData)
-        .then(() => console.log("MDN shared successfully"))
+        .then(() => console.log("gocovid19 shared successfully"))
         .catch(console.log);
     }
   },

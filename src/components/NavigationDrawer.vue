@@ -10,7 +10,7 @@
     <v-layout column justify-space-between class="drawer-container">
       <div>
         <v-layout justify-center class="pa-5 my-5">
-          <v-btn to="/" icon> <img :src="logo" height="56"/></v-btn>
+          <v-btn to="/" icon> <img :src="logo" height="56" alt="logo"/></v-btn>
         </v-layout>
         <v-list dense nav class="py-0">
           <v-list-item
@@ -37,6 +37,7 @@
         >
           <v-list-item-avatar>
             <img
+              alt="nmanikiran"
               src="https://avatars1.githubusercontent.com/u/3726349?s=460&u=217d532a8d6c1e4a2038ecead0b028605836c18d&v=4"
             />
           </v-list-item-avatar>

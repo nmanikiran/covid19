@@ -27,7 +27,7 @@
       <Footer />
       <v-snackbar v-if="notification.message" v-model="showSnackbar">
         {{ notification.message }}
-        <v-btn @click="closeNotification">Ok</v-btn>
+        <v-btn text @click="closeNotification">Ok</v-btn>
       </v-snackbar>
     </v-app>
   </div>

@@ -3,9 +3,12 @@
     <h1>FAQ's</h1>
     <v-expansion-panels popout flat mandatory>
       <v-expansion-panel focusable v-for="(item, i) in faqList" :key="i">
-        <v-expansion-panel-header class="title">{{
-          item.title
-        }}</v-expansion-panel-header>
+        <v-expansion-panel-header
+          class="title"
+          :class="$vuetify.breakpoint.mdAndDown ? 'px-2' : ''"
+        >
+          {{ item.title }}
+        </v-expansion-panel-header>
         <v-expansion-panel-content>
           {{ item.content }}
         </v-expansion-panel-content>

@@ -41,7 +41,10 @@
       <v-card-text class="white--text">
         <p>
           Made with &#10084; by
-          <a class="myprofile pr-2" href="https://github.com/nmanikiran"
+          <a
+            class="myprofile pr-2"
+            href="https://github.com/nmanikiran"
+            target="_blank"
             >Mani Kiran</a
           >
           -<span class="pl-2">{{ new Date().getFullYear() }}</span>

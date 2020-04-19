@@ -11,23 +11,33 @@
         v-for="n in data"
         :key="n.title"
       >
-        <v-card class="pa-3" dark :color="n.color">
+        <v-card class="pa-1" dark :color="n.color">
           <v-list-item three-line>
-            <v-list-item-content>
+            <v-list-item-content class="pb-0">
               <div class="overline mb-4">{{ n.title }}</div>
               <v-list-item-title class="headline mb-1">{{
                 n.count
               }}</v-list-item-title>
-              <v-list-item-subtitle>{{ n.description }}</v-list-item-subtitle>
+              <v-list-item-subtitle>
+                {{ `Number of ${n.title} cases` }}</v-list-item-subtitle
+              >
             </v-list-item-content>
           </v-list-item>
+          <v-card-actions class="pa-0">
+            <v-list-item>
+              <v-list-item-content>{{ n.updated }}</v-list-item-content>
+              <v-list-item-action v-if="n.increase">
+                <v-btn color="#fff" class="ma-0 pa-0 red--text">
+                  <v-icon>mdi-chart-line-variant</v-icon>
+                  {{ n.increase }}%</v-btn
+                ></v-list-item-action
+              >
+            </v-list-item>
+          </v-card-actions>
         </v-card>
       </v-col>
     </v-row>
-    <br /><br />
-    <v-divider></v-divider>
-
-    <br /><br />
+    <v-divider class="my-5"></v-divider>
     <v-card>
       <v-card-title>
         <h1>Country wise list</h1>
@@ -88,38 +98,40 @@ export default {
     async getData() {
       try {
         const response = await axios.get(`${process.env.VUE_APP_API}/all`);
-        const { cases, deaths, recovered, active, updated } = response.data;
+        const {
+          cases,
+          deaths,
+          recovered,
+          active,
+          updated,
+          todayCases,
+          todayDeaths
+        } = response.data;
         const infected = {
           title: "Infected",
           color: "info",
           count: Number(cases),
-          description: `Number of Infected cases as of ${new Date(
-            updated
-          ).toDateString()}`
+          updated: `Updated on : ${new Date(updated).toDateString()}`,
+          increase: Math.round((todayCases / cases) * 100)
         };
         const deathscases = {
           title: "Deaths",
           color: "error",
           count: Number(deaths),
-          description: `Number of Deaths cases as of ${new Date(
-            updated
-          ).toDateString()}`
+          updated: `Updated on : ${new Date(updated).toDateString()}`,
+          increase: Math.round((todayDeaths / deaths) * 100)
         };
         const recoveredcases = {
           title: "Recovered",
           color: "success",
           count: Number(recovered),
-          description: `Number of Recovered cases as of ${new Date(
-            updated
-          ).toDateString()}`
+          updated: `Updated on : ${new Date(updated).toDateString()}`
         };
         const activecases = {
           title: "Active",
           color: "orange",
           count: Number(active),
-          description: `Number of Active cases as of ${new Date(
-            updated
-          ).toDateString()}`
+          updated: `Updated on : ${new Date(updated).toDateString()}`
         };
 
         this.data = [

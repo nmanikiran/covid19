@@ -45,10 +45,10 @@
       </p>
     </div>
     <div class="text-center mt-5">
-      <img :src="poweredBy" class="ma-3" height="100" />
+      <img :src="poweredBy" class="ma-3" height="100" alt="doh" />
       <div>
         <h1>Adopted from DOH guidelines</h1>
-        <a href="https://www.doh.gov.ph/">doh.gov.ph</a>
+        <a href="https://www.doh.gov.ph/" target="_blank">doh.gov.ph</a>
       </div>
     </div>
   </v-layout>

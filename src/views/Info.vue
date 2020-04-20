@@ -1,5 +1,17 @@
 <template>
   <v-layout column>
+    <h1 class="my-3">What you need todo</h1>
+    <v-row wrap justify="space-around">
+      <v-tooltip bottom v-for="(item, index) in todos" :key="index">
+        <template v-slot:activator="{ on }">
+          <v-avatar size="80" v-on="on" class="elevation-5 ma-5">
+            <img :src="item.src" alt="John" />
+          </v-avatar>
+        </template>
+        {{ item.title }}
+      </v-tooltip>
+    </v-row>
+    <v-divider class="my-5"></v-divider>
     <h1>The Buzz in the internet</h1>
     <p class="text--secondary" v-if="isSpeachSupported">
       Tap on each buzz word to know more
@@ -46,7 +58,30 @@
 import { mapGetters } from "vuex";
 export default {
   data() {
-    return {};
+    return {
+      todos: [
+        {
+          src: `${process.env.VUE_APP_IMAGE_URL_PREFIX}v1587353316/covid-19/007-medical-mask.svg`,
+          title: "Mask"
+        },
+        {
+          src: `${process.env.VUE_APP_IMAGE_URL_PREFIX}v1587222013/covid-19/008-washing-hands.svg`,
+          title: "Wash Hands"
+        },
+        {
+          src: `${process.env.VUE_APP_IMAGE_URL_PREFIX}v1587222013/covid-19/009-distance.svg`,
+          title: "Social Distance"
+        },
+        {
+          src: `${process.env.VUE_APP_IMAGE_URL_PREFIX}v1587353302/covid-19/002-spray.svg`,
+          title: "Sanitize"
+        },
+        {
+          src: `${process.env.VUE_APP_IMAGE_URL_PREFIX}v1587222013/covid-19/006-sneeze.svg`,
+          title: "Cover"
+        }
+      ]
+    };
   },
   computed: {
     ...mapGetters(["buzzWords"]),
@@ -58,9 +93,9 @@ export default {
     speak(word) {
       if (!window.speechSynthesis) return;
       const synth = window.speechSynthesis;
-      const voices = synth.getVoices();
       const msg = new SpeechSynthesisUtterance(word.description);
-      msg.voice = Array.from(voices)[1];
+      msg.pitch = 0.6;
+      msg.rate = 0.8;
       synth.speak(msg);
     }
   }

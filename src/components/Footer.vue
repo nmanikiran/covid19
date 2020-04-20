@@ -20,19 +20,26 @@
       </v-card-text>
 
       <v-card-text class="white--text pt-0">
-        Need to thank few people here the API are powerd by
+        Need to thank few people here the API's are powerd by
         <a
           href="https://corona.lmao.ninja/docs/#/"
           target="_blank"
           rel="noreferrer noopener"
-          >lmao.ninja</a
         >
+          lmao.ninja</a
+        >
+        , images are hosted on
+        <a href="cloudinary.com" target="_blank" rel="noreferrer noopener">
+          cloudinary</a
+        >
+        , app is hosted on <a href="https://app.netlify.com/">netlify</a>
         and the icons are from
         <a
           href="https://www.flaticon.com/home"
           target="_blank"
           rel="noreferrer noopener"
-          >Flaticon</a
+        >
+          Flaticon</a
         >
       </v-card-text>
 

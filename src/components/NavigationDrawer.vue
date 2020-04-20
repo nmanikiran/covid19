@@ -30,6 +30,18 @@
       </div>
       <v-spacer></v-spacer>
       <div>
+        <v-row justify="center" align="center">
+          <v-switch
+            :light="mode === 'dark'"
+            v-model="mode"
+            true-value="dark"
+            false-value="light"
+            id="mode"
+            color="success"
+          >
+          </v-switch
+          ><label for="mode" class="white--text"> {{ mode }}</label>
+        </v-row>
         <v-list-item
           two-line
           href="https://github.com/nmanikiran"
@@ -64,6 +76,7 @@ export default {
   },
   data() {
     return {
+      mode: "light",
       logo: `${process.env.VUE_APP_IMAGE_URL_PREFIX}v1587286951/covid-19/covid19.png`
     };
   },
@@ -78,7 +91,35 @@ export default {
       }
     }
   },
-  methods: {}
+  methods: {
+    changeTheme(mode) {
+      console.log(this.$vuetify.theme);
+      this.$vuetify.theme.isDark = mode === "dark";
+      if (mode === "dark") {
+        this.$vuetify.theme.themes.dark.primary = "#000000";
+      } else {
+        this.$vuetify.theme.themes.dark.primary = "#1976D2";
+      }
+    }
+  },
+  watch: {
+    mode: {
+      immediate: true,
+      deep: true,
+      handler(newValue) {
+        this.changeTheme(newValue);
+      }
+    }
+  },
+  mounted() {
+    const mq = window.matchMedia("(prefers-color-scheme: dark)");
+    let mode = mq.matches ? "dark" : "light";
+    this.changeTheme(mode);
+    mq.addEventListener("change", (e) => {
+      mode = e.matches ? "dark" : "light";
+      this.changeTheme(mode);
+    });
+  }
 };
 </script>
 

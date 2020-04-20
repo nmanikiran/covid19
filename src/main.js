@@ -14,7 +14,9 @@ Vue.config.productionTip = false;
 Vue.use(
   VueGtag,
   {
+    appName: "goCovid19",
     config: { id: process.env.VUE_APP_GTAG_ID },
+    pageTrackerEnabled: true,
     pageTrackerScreenviewEnabled: true
   },
   router

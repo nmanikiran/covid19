@@ -93,7 +93,6 @@ export default {
   },
   methods: {
     changeTheme(mode) {
-      console.log(this.$vuetify.theme);
       this.$vuetify.theme.isDark = mode === "dark";
       if (mode === "dark") {
         this.$vuetify.theme.themes.dark.primary = "#000000";

@@ -69,8 +69,13 @@ export default {
         await navigator.share(shareData);
         console.log("gocovid19 shared successfully");
       } catch (error) {
+        this.notification = {
+          message:
+            "If You found this site informative please share with your friends & family"
+        };
+        this.showSnackbar = true;
         console.log(error);
-        alert("Error while shareing");
+        console.log("Error while sharing");
       }
     }
   },

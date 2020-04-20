@@ -13,27 +13,42 @@ const routes = [
   {
     path: "/",
     name: "Home",
-    component: Home
+    component: Home,
+    meta: {
+      title: "Stats | Covid19 Info"
+    }
   },
   {
     path: "/faq",
     name: "faq",
-    component: Faq
+    component: Faq,
+    meta: {
+      title: "Questions & Answers | Covid19 Info"
+    }
   },
   {
     path: "/symptoms",
     name: "Symptoms",
-    component: Symptoms
+    component: Symptoms,
+    meta: {
+      title: "Symptoms Checklist | Covid19 Info"
+    }
   },
   {
     path: "/info",
     name: "info",
-    component: Info
+    component: Info,
+    meta: {
+      title: "Inforamtion | Covid19 Info"
+    }
   },
   {
     path: "/WHO",
     name: "WHO",
-    component: WHO
+    component: WHO,
+    meta: {
+      title: "WHO | Covid19 Info"
+    }
   },
   {
     path: "/life",
@@ -48,6 +63,14 @@ const router = new VueRouter({
   },
   routes,
   mode: "history"
+});
+router.beforeEach((to, from, next) => {
+  const nearestWithTitle = to.matched
+    .slice()
+    .reverse()
+    .find((r) => r.meta && r.meta.title);
+  if (nearestWithTitle) document.title = nearestWithTitle.meta.title;
+  next();
 });
 
 export default router;

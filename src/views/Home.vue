@@ -136,9 +136,9 @@ export default {
 
         this.data = [
           { ...infected },
+          { ...activecases },
           { ...deathscases },
-          { ...recoveredcases },
-          { ...activecases }
+          { ...recoveredcases }
         ];
       } catch (error) {
         console.log(error);

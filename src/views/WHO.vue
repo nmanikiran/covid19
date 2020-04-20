@@ -35,6 +35,7 @@
     </p>
 
     <h1>Myth Busters</h1>
+    <v-divider class="py-3"></v-divider>
     <div class="slider">
       <div class="item" v-for="(item, i) in mythImages" :key="i">
         <v-img eager :src="item" contain />

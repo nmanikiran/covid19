@@ -103,8 +103,6 @@ export default {
   },
   watch: {
     mode: {
-      immediate: true,
-      deep: true,
       handler(newValue) {
         this.changeTheme(newValue);
       }
@@ -112,11 +110,9 @@ export default {
   },
   mounted() {
     const mq = window.matchMedia("(prefers-color-scheme: dark)");
-    let mode = mq.matches ? "dark" : "light";
-    this.changeTheme(mode);
+    this.mode = mq.matches ? "dark" : "light";
     mq.addEventListener("change", (e) => {
-      mode = e.matches ? "dark" : "light";
-      this.changeTheme(mode);
+      this.mode = e.matches ? "dark" : "light";
     });
   }
 };

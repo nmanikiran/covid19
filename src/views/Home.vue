@@ -63,7 +63,8 @@
         :headers="headers"
         :items="desserts"
         :search="search"
-        sort-desc
+        :sort-by="['cases']"
+        :sort-desc="[true]"
         @click:row="testRowclick"
         :footer-props="{
           itemsPerPageOptions: itemsPerPageOptions
@@ -108,6 +109,7 @@ export default {
   },
   computed: {
     itemsPerPageOptions() {
+      this.$gtag.event("showAllToggle", { pagination: this.showAll });
       return this.showAll ? [-1] : [5, 10, 15, -1];
     }
   },
@@ -116,6 +118,7 @@ export default {
     testRowclick(e) {
       const data = this.desserts.find((d) => d.country === e.country);
       this.$store.commit("toggleStatsModal", data);
+      this.$gtag.event("toggleStatsModal", { country: data.country });
     },
     async getData() {
       try {

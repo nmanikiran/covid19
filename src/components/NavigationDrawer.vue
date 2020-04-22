@@ -99,6 +99,7 @@ export default {
       } else {
         this.$vuetify.theme.themes.dark.primary = "#1976D2";
       }
+      this.$gtag.event("changeTheme", { mode });
     }
   },
   watch: {

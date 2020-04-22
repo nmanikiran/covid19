@@ -69,6 +69,7 @@ export default {
 
       try {
         await navigator.share(shareData);
+        this.$gtag.event("shareLink", { success: true });
         console.log("gocovid19 shared successfully");
       } catch (error) {
         this.notification = {
@@ -76,6 +77,7 @@ export default {
             "If You found this site informative please share with your friends & family"
         };
         this.showSnackbar = true;
+        this.$gtag.event("shareLink", { success: false });
         console.log(error);
         console.log("Error while sharing");
       }

@@ -36,6 +36,7 @@
               rel="noreferrer noopener"
               target="_blank"
               href="https://covid19responsefund.org/"
+              @click="recordClick('WHO')"
             >
               <v-avatar size="80" v-on="on" class="elevation-5 ma-5">
                 <img
@@ -53,6 +54,7 @@
               rel="noreferrer noopener"
               target="_blank"
               href="https://www.bhimupi.org.in/donation-digitized-with-bhim-upi"
+              @click="recordClick('India')"
             >
               <v-avatar size="80" v-on="on" class="elevation-5 ma-5">
                 <img
@@ -71,6 +73,7 @@
               rel="noreferrer noopener"
               target="_blank"
               href="https://www.nhscharitiestogether.co.uk/donate/"
+              @click="recordClick('UK')"
             >
               <v-avatar size="80" v-on="on" class="elevation-5 ma-5">
                 <img
@@ -155,6 +158,9 @@ export default {
       msg.pitch = 0.6;
       msg.rate = 0.8;
       synth.speak(msg);
+    },
+    recordClick(d) {
+      this.$gtag.event("donations", { link: d });
     }
   }
 };

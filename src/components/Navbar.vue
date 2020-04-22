@@ -42,6 +42,7 @@ export default {
   methods: {
     toggleMenu() {
       this.$store.commit("toggleNavigationDrawer");
+      this.$gtag.event("toggleMenu", { route: this.$route.name });
     }
   }
 };

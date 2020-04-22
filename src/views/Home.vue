@@ -40,7 +40,12 @@
     <v-divider class="my-5"></v-divider>
     <v-layout>
       <v-row justify="start" align="center" class="px-2">
-        <v-switch v-model="showAll" color="success" id="pagination"></v-switch>
+        <v-switch
+          @change="showAllToggle"
+          v-model="showAll"
+          color="success"
+          id="pagination"
+        ></v-switch>
         <label for="pagination"> Show all data</label>
       </v-row>
     </v-layout>
@@ -63,11 +68,8 @@
         :headers="headers"
         :items="desserts"
         :search="search"
-        sort-desc
+        :options.sync="dataTableOptions"
         @click:row="testRowclick"
-        :footer-props="{
-          itemsPerPageOptions: itemsPerPageOptions
-        }"
       >
         <template v-slot:item.countryInfo="{ item }">
           <v-avatar :size="36" class="elevation-4">
@@ -85,7 +87,11 @@ import axios from "axios";
 export default {
   data() {
     return {
-      showAll: false,
+      dataTableOptions: {
+        sortBy: ["cases"],
+        sortDesc: [true],
+        itemsPerPage: 10
+      },
       data: [],
       updated: "",
       search: "",
@@ -107,15 +113,16 @@ export default {
     };
   },
   computed: {
-    itemsPerPageOptions() {
-      return this.showAll ? [-1] : [5, 10, 15, -1];
+    showAll() {
+      return this.dataTableOptions.itemsPerPage === -1;
     }
   },
 
   methods: {
     testRowclick(e) {
-      const data = this.desserts.find((d) => d.country === e.country);
+      const data = this.desserts.find(d => d.country === e.country);
       this.$store.commit("toggleStatsModal", data);
+      this.$gtag.event("toggleStatsModal", { country: data.country });
     },
     async getData() {
       try {
@@ -180,6 +187,10 @@ export default {
       } catch (error) {
         this.isLoading = false;
       }
+    },
+    showAllToggle(val) {
+      this.$gtag.event("showAllToggle", { pagination: this.showAll });
+      this.dataTableOptions.itemsPerPage = val ? -1 : 10;
     }
   },
   mounted() {

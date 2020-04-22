@@ -6,6 +6,8 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     isOpenBurger: false,
+    isShowModal: false,
+    modalData: null,
     navLinks: [
       { title: "WHO", icon: "mdi-alpha-w-circle-outline", path: "WHO" },
       { title: "Symptoms", icon: "mdi-format-list-checkbox", path: "symptoms" },
@@ -175,12 +177,21 @@ export default new Vuex.Store({
         payload = !state.isOpenBurger;
       }
       Vue.set(state, "isOpenBurger", payload);
+    },
+    toggleStatsModal(state, payload) {
+      if (payload) {
+        Vue.set(state, "modalData", payload);
+      }
+      Vue.set(state, "isShowModal", !state.isShowModal);
     }
   },
   actions: {},
   getters: {
     isOpenBurger(state) {
       return state.isOpenBurger;
+    },
+    isShowModal(state) {
+      return state.isShowModal;
     },
     navigationLinks(state) {
       return state.navLinks;
@@ -190,6 +201,9 @@ export default new Vuex.Store({
     },
     buzzWords(state) {
       return state.words;
+    },
+    statsData(state) {
+      return state.modalData;
     }
   },
   modules: {}

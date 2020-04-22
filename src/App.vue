@@ -24,6 +24,7 @@
           </v-btn>
         </v-fab-transition>
       </v-layout>
+      <StatsModal />
       <Footer />
       <v-snackbar v-if="notification.message" v-model="showSnackbar">
         {{ notification.message }}
@@ -36,6 +37,7 @@
 <script>
 import NavBar from "./components/Navbar";
 import Footer from "./components/Footer";
+import StatsModal from "./components/StatsModal";
 import NavigationDrawer from "./components/NavigationDrawer";
 
 export default {
@@ -92,6 +94,7 @@ export default {
   components: {
     NavBar,
     NavigationDrawer,
+    StatsModal,
     Footer
   }
 };

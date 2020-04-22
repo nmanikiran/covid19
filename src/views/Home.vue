@@ -64,12 +64,13 @@
         :items="desserts"
         :search="search"
         sort-desc
+        @click:row="testRowclick"
         :footer-props="{
           itemsPerPageOptions: itemsPerPageOptions
         }"
       >
         <template v-slot:item.countryInfo="{ item }">
-          <v-avatar :size="36">
+          <v-avatar :size="36" class="elevation-4">
             <img :src="item.countryInfo.flag" :alt="item.countryInfo.iso2" />
           </v-avatar>
         </template>
@@ -112,6 +113,10 @@ export default {
   },
 
   methods: {
+    testRowclick(e) {
+      const data = this.desserts.find((d) => d.country === e.country);
+      this.$store.commit("toggleStatsModal", data);
+    },
     async getData() {
       try {
         const response = await axios.get(`${process.env.VUE_APP_API}/all`);
@@ -130,7 +135,6 @@ export default {
           count: new Intl.NumberFormat(navigator.language).format(
             Number(cases)
           ),
-          updated: `Updated on : ${new Date(updated).toDateString()}`,
           increase: Math.round((todayCases / cases) * 100)
         };
         this.updated = `Last updated on : ${new Date(updated).toDateString()}`;
@@ -140,7 +144,6 @@ export default {
           count: new Intl.NumberFormat(navigator.language).format(
             Number(deaths)
           ),
-          updated: `Updated on : ${new Date(updated).toDateString()}`,
           increase: Math.round((todayDeaths / deaths) * 100)
         };
         const recoveredcases = {
@@ -148,16 +151,14 @@ export default {
           color: "success",
           count: new Intl.NumberFormat(navigator.language).format(
             Number(recovered)
-          ),
-          updated: `Updated on : ${new Date(updated).toDateString()}`
+          )
         };
         const activecases = {
           title: "Active",
           color: "orange",
           count: new Intl.NumberFormat(navigator.language).format(
             Number(active)
-          ),
-          updated: `Updated on : ${new Date(updated).toDateString()}`
+          )
         };
 
         this.data = [
@@ -174,17 +175,7 @@ export default {
       try {
         this.isLoading = true;
         const results = await axios.get(`${process.env.VUE_APP_API}/countries`);
-        this.desserts = results.data.map((item) => {
-          const {
-            country,
-            cases,
-            deaths,
-            active,
-            recovered,
-            countryInfo
-          } = item;
-          return { country, cases, deaths, active, recovered, countryInfo };
-        });
+        this.desserts = results.data;
         this.isLoading = false;
       } catch (error) {
         this.isLoading = false;

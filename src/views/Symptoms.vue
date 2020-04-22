@@ -63,55 +63,55 @@ export default {
       symptomsChecklist: [
         {
           img: `${ImageUrl}/symptoms/01-cough.svg`,
-          title: "Do you have cought ?",
+          title: "Do you have caught?",
           points: 1,
           active: false
         },
         {
           img: `${ImageUrl}/symptoms/02-cold.svg`,
-          title: "Do you have cold ?",
+          title: "Do you have a cold?",
           points: 1,
           active: false
         },
         {
           img: `${ImageUrl}/symptoms/03-diarrhea.svg`,
-          title: "Are you having Diarrhea ?",
+          title: "Are you having Diarrhea?",
           points: 1,
           active: false
         },
         {
           img: `${ImageUrl}/symptoms/04-sore-throat.svg`,
-          title: "Do you have sore throat ?",
+          title: "Do you have a sore throat?",
           points: 1,
           active: false
         },
         {
           img: `${ImageUrl}/symptoms/05-myalgia.svg`,
-          title: "Are you expressing MYALGIA or Body Aches ?",
+          title: "Are you expressing MYALGIA or Body Aches?",
           points: 1,
           active: false
         },
         {
           img: `${ImageUrl}/symptoms/06-headache.svg`,
-          title: "Do you have headache ?",
+          title: "Do you have a headache?",
           points: 1,
           active: false
         },
         {
           img: `${ImageUrl}/symptoms/07-fever.svg`,
-          title: "Do you have feaver (Teamp 37.8 C / 100 F above) ?",
+          title: "Do you have a fever (Temp 37.8 C / 100 F above)?",
           points: 1,
           active: false
         },
         {
           img: `${ImageUrl}/symptoms/08-difficulty-breathing.svg`,
-          title: "Do you have difficulty in breathing ?",
+          title: "Do you have difficulty in breathing?",
           points: 2,
           active: false
         },
         {
           img: `${ImageUrl}/symptoms/09-fatigue.svg`,
-          title: "Are you expressing Fatigue ?",
+          title: "Are you expressing Fatigue?",
           points: 2,
           active: false
         },
@@ -123,14 +123,14 @@ export default {
         },
         {
           img: `${ImageUrl}/symptoms/11-no-flight.svg`,
-          title: "Do you have travel history to a COVID-19 infected Area ?",
+          title: "Do you have travel history to a COVID-19 infected Area?",
           points: 3,
           active: false
         },
         {
           img: `${ImageUrl}/symptoms/12-patient.svg`,
           title:
-            "Do you have a direct contact or is taking care of a positive COVID-19 PATIENT ?",
+            "Do you have direct contact or are taking care of a positive COVID-19 PATIENT??",
           points: 3,
           active: false
         }

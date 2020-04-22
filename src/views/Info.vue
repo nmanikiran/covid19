@@ -26,7 +26,65 @@
         >{{ word.label }}</v-chip
       >
     </div>
-    <v-divider></v-divider>
+    <v-divider class="my-5"></v-divider>
+    <h1 class="text-center">Donations</h1>
+    <v-layout dark>
+      <v-row wrap justify="space-around">
+        <v-tooltip top>
+          <template v-slot:activator="{ on }">
+            <a
+              rel="noreferrer noopener"
+              target="_blank"
+              href="https://covid19responsefund.org/"
+            >
+              <v-avatar size="80" v-on="on" class="elevation-5 ma-5">
+                <img
+                  src="https://res.cloudinary.com/nmanikiran/image/upload/v1587536766/covid-19/who.png"
+                  alt="WHO"
+                />
+              </v-avatar>
+            </a>
+          </template>
+          <span>WHO</span>
+        </v-tooltip>
+        <v-tooltip top>
+          <template v-slot:activator="{ on }">
+            <a
+              rel="noreferrer noopener"
+              target="_blank"
+              href="https://www.bhimupi.org.in/donation-digitized-with-bhim-upi"
+            >
+              <v-avatar size="80" v-on="on" class="elevation-5 ma-5">
+                <img
+                  src="https://res.cloudinary.com/nmanikiran/image/upload/v1587536613/covid-19/in.png"
+                  alt="India"
+                />
+              </v-avatar>
+            </a>
+          </template>
+          <span>India</span>
+        </v-tooltip>
+
+        <v-tooltip top>
+          <template v-slot:activator="{ on }">
+            <a
+              rel="noreferrer noopener"
+              target="_blank"
+              href="https://www.nhscharitiestogether.co.uk/donate/"
+            >
+              <v-avatar size="80" v-on="on" class="elevation-5 ma-5">
+                <img
+                  src="https://res.cloudinary.com/nmanikiran/image/upload/v1587536613/covid-19/uk.png"
+                  alt="UK"
+                />
+              </v-avatar>
+            </a>
+          </template>
+          <span>UK</span>
+        </v-tooltip>
+      </v-row>
+    </v-layout>
+    <v-divider class="my-5"></v-divider>
     <h1 class="mt-5">The Coronavirus Explained & What You Should Do</h1>
     <v-divider class="my-3"></v-divider>
     <iframe

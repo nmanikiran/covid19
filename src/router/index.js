@@ -39,7 +39,7 @@ const routes = [
     name: "info",
     component: Info,
     meta: {
-      title: "Inforamtion | Covid19 Info"
+      title: "Information | Covid19 Info"
     }
   },
   {

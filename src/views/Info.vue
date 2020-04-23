@@ -23,8 +23,8 @@
         :key="index"
         :color="word.color"
         @click="speak(word)"
-        >{{ word.label }}</v-chip
-      >
+        >{{ word.label }}
+      </v-chip>
     </div>
     <v-divider class="my-5"></v-divider>
     <h1 class="text-center">Donations</h1>
@@ -36,7 +36,7 @@
               rel="noreferrer noopener"
               target="_blank"
               href="https://covid19responsefund.org/"
-              @click="recordClick('WHO')"
+              @click="trackDonaion('WHO')"
             >
               <v-avatar size="80" v-on="on" class="elevation-5 ma-5">
                 <img
@@ -54,7 +54,7 @@
               rel="noreferrer noopener"
               target="_blank"
               href="https://www.bhimupi.org.in/donation-digitized-with-bhim-upi"
-              @click="recordClick('India')"
+              @click="trackDonaion('India')"
             >
               <v-avatar size="80" v-on="on" class="elevation-5 ma-5">
                 <img
@@ -73,7 +73,7 @@
               rel="noreferrer noopener"
               target="_blank"
               href="https://www.nhscharitiestogether.co.uk/donate/"
-              @click="recordClick('UK')"
+              @click="trackDonaion('UK')"
             >
               <v-avatar size="80" v-on="on" class="elevation-5 ma-5">
                 <img
@@ -141,7 +141,8 @@ export default {
           src: `${process.env.VUE_APP_IMAGE_URL_PREFIX}v1587222013/covid-19/006-sneeze.svg`,
           title: "Cover"
         }
-      ]
+      ],
+      synth: window.speechSynthesis
     };
   },
   computed: {
@@ -152,15 +153,17 @@ export default {
   },
   methods: {
     speak(word) {
-      if (!window.speechSynthesis) return;
-      const synth = window.speechSynthesis;
+      if (!window.speechSynthesis || !this.synth) return;
+      if (this.synth.speaking) {
+        this.synth.cancel();
+      }
       const msg = new SpeechSynthesisUtterance(word.description);
       msg.pitch = 0.6;
       msg.rate = 0.8;
-      synth.speak(msg);
+      this.synth.speak(msg);
     },
-    recordClick(d) {
-      this.$gtag.event("donations", { link: d });
+    trackDonaion(name) {
+      this.$gtag.event("donations", { name });
     }
   }
 };

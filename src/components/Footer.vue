@@ -26,12 +26,12 @@
           target="_blank"
           rel="noreferrer noopener"
         >
-          lmao.ninja</a
-        >
+          lmao.ninja
+        </a>
         , images are hosted on
         <a href="cloudinary.com" target="_blank" rel="noreferrer noopener">
-          cloudinary</a
-        >
+          cloudinary
+        </a>
         , app is hosted on <a href="https://app.netlify.com/">netlify</a>
         and the icons are from
         <a
@@ -39,8 +39,8 @@
           target="_blank"
           rel="noreferrer noopener"
         >
-          Flaticon</a
-        >
+          Flaticon
+        </a>
       </v-card-text>
 
       <v-divider></v-divider>
@@ -52,8 +52,8 @@
             class="myprofile pr-2"
             href="https://github.com/nmanikiran"
             target="_blank"
-            >Mani Kiran</a
-          >
+            >Mani Kiran
+          </a>
           -<span class="pl-2">{{ new Date().getFullYear() }}</span>
         </p>
       </v-card-text>

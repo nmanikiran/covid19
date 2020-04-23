@@ -1,7 +1,7 @@
 <template>
   <div class="faq">
     <h1>FAQ's</h1>
-    <v-expansion-panels popout flat mandatory>
+    <v-expansion-panels popout flat mandatory v-if="faqList">
       <v-expansion-panel focusable v-for="(item, i) in faqList" :key="i">
         <v-expansion-panel-header
           class="title"

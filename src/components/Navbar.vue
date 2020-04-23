@@ -4,8 +4,8 @@
       <v-btn icon @click="toggleMenu"> <v-icon>mdi-menu</v-icon></v-btn>
       <v-spacer v-if="!$vuetify.breakpoint.mdAndUp"></v-spacer>
       <v-btn to="/" icon>
-        <img :src="logo" height="56" alt="covid19 logo"
-      /></v-btn>
+        <img :src="logo" height="56" alt="covid19 logo" />
+      </v-btn>
     </div>
 
     <v-spacer></v-spacer>

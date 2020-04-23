@@ -9,9 +9,9 @@
         </v-row>
         <v-list-item three-line>
           <v-list-item-content class="pb-0">
-            <v-list-item-title class="title">{{
-              statsData.country
-            }}</v-list-item-title>
+            <v-list-item-title class="title">
+              {{ statsData.country }}
+            </v-list-item-title>
             <v-layout column class="my-3">
               <v-row class="stats-grid px-3">
                 <p>Cases: {{ statsData.cases }}</p>

@@ -16,9 +16,9 @@
           <v-list-item three-line>
             <v-list-item-content class="pb-0">
               <div class="overline mb-3">{{ n.title }}</div>
-              <v-list-item-title class="headline mb-1">{{
-                n.count
-              }}</v-list-item-title>
+              <v-list-item-title class="headline mb-1">
+                {{ n.count }}
+              </v-list-item-title>
             </v-list-item-content>
           </v-list-item>
           <v-card-actions class="pa-0">
@@ -29,9 +29,9 @@
               <v-list-item-action v-if="n.increase">
                 <v-btn color="#fff" class="ma-0 pa-0 red--text">
                   <v-icon>mdi-chart-line-variant</v-icon>
-                  {{ n.increase }}%</v-btn
-                ></v-list-item-action
-              >
+                  {{ n.increase }}%
+                </v-btn>
+              </v-list-item-action>
             </v-list-item>
           </v-card-actions>
         </v-card>
@@ -120,7 +120,7 @@ export default {
 
   methods: {
     testRowclick(e) {
-      const data = this.desserts.find(d => d.country === e.country);
+      const data = this.desserts.find((d) => d.country === e.country);
       this.$store.commit("toggleStatsModal", data);
       this.$gtag.event("toggleStatsModal", { country: data.country });
     },

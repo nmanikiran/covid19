@@ -27,8 +27,8 @@
 
         <v-list-item-action>
           <v-list-item-action-text class="title">
-            {{ item.points }}pt</v-list-item-action-text
-          >
+            {{ item.points }}pt
+          </v-list-item-action-text>
         </v-list-item-action>
       </v-list-item>
     </v-list>

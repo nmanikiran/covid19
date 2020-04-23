@@ -10,7 +10,6 @@
         v-for="(word, index) in buzzWords"
         :key="index"
         :color="word.color"
-        @click="speak(word)"
         >{{ word.label }}</v-chip
       >
     </div>
@@ -29,16 +28,7 @@ export default {
       return window.speechSynthesis;
     }
   },
-  methods: {
-    speak(word) {
-      if (!window.speechSynthesis) return;
-      const synth = window.speechSynthesis;
-      const voices = synth.getVoices();
-      const msg = new SpeechSynthesisUtterance(word.description);
-      msg.voice = Array.from(voices)[1];
-      synth.speak(msg);
-    }
-  }
+  methods: {}
 };
 </script>
 

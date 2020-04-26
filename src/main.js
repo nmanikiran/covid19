@@ -9,6 +9,7 @@ import vuetify from "./plugins/vuetify";
 import "roboto-fontface/css/roboto/roboto-fontface.css";
 import "@mdi/font/css/materialdesignicons.css";
 import "./styles.scss";
+import * as VueGoogleMaps from "vue2-google-maps";
 
 Vue.config.productionTip = false;
 Vue.use(
@@ -21,9 +22,15 @@ Vue.use(
   },
   router
 );
+Vue.use(VueGoogleMaps, {
+  load: {
+    key: "",
+    libraries: "places"
+  }
+});
 new Vue({
   router,
   store,
   vuetify,
-  render: (h) => h(App)
+  render: h => h(App)
 }).$mount("#app");

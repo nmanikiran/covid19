@@ -6,6 +6,7 @@ import WHO from "./../views/WHO.vue";
 import Home from "./../views/Home.vue";
 import LifeStyle from "./../views/LifeStyle.vue";
 import Symptoms from "./../views/Symptoms.vue";
+import Map from "./../views/Map.vue";
 
 Vue.use(VueRouter);
 
@@ -54,6 +55,11 @@ const routes = [
     path: "/life",
     name: "Life",
     component: LifeStyle
+  },
+  {
+    path: "/map/:title",
+    name: "Map",
+    component: Map
   }
 ];
 
@@ -68,7 +74,7 @@ router.beforeEach((to, from, next) => {
   const nearestWithTitle = to.matched
     .slice()
     .reverse()
-    .find((r) => r.meta && r.meta.title);
+    .find(r => r.meta && r.meta.title);
   if (nearestWithTitle) document.title = nearestWithTitle.meta.title;
   next();
 });

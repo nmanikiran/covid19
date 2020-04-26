@@ -1,5 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import axios from "axios";
 
 Vue.use(Vuex);
 
@@ -8,6 +9,8 @@ export default new Vuex.Store({
     isOpenBurger: false,
     isShowModal: false,
     modalData: null,
+    infectedCountries: [],
+    isDataLoading: false,
     navLinks: [
       { title: "WHO", icon: "mdi-alpha-w-circle-outline", path: "WHO" },
       { title: "Symptoms", icon: "mdi-format-list-checkbox", path: "symptoms" },
@@ -184,9 +187,26 @@ export default new Vuex.Store({
         Vue.set(state, "modalData", payload);
       }
       Vue.set(state, "isShowModal", !state.isShowModal);
+    },
+    setInfectedCountriesData(state, payload) {
+      Vue.set(state, "infectedCountries", payload);
+    },
+    setIsDataLoading(state, payload) {
+      Vue.set(state, "isDataLoading", payload);
     }
   },
-  actions: {},
+  actions: {
+    async getCountrywiseData({ commit }) {
+      try {
+        commit("setIsDataLoading", true);
+        const results = await axios.get(`${process.env.VUE_APP_API}/countries`);
+        commit("setInfectedCountriesData", results.data || []);
+        commit("setIsDataLoading", false);
+      } catch (error) {
+        commit("setIsDataLoading", false);
+      }
+    }
+  },
   getters: {
     isOpenBurger(state) {
       return state.isOpenBurger;
@@ -205,6 +225,12 @@ export default new Vuex.Store({
     },
     statsData(state) {
       return state.modalData;
+    },
+    getInfectedCountriesData(state) {
+      return state.infectedCountries;
+    },
+    isDataLoading(state) {
+      return state.isDataLoading;
     }
   },
   modules: {}

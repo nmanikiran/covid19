@@ -12,8 +12,10 @@
           :key="link.icon"
           class="mx-4 white--text"
           :href="link.url"
+          :title="link.label"
           icon
           target="_blank"
+          :aria-label="link.label"
         >
           <v-icon size="24px">{{ link.icon }}</v-icon>
         </v-btn>

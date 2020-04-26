@@ -1,7 +1,7 @@
 <template>
   <v-container fluid>
     <p class="text--secondary ma-0">{{ updated }}</p>
-    <v-row>
+    <v-row v-if="stats">
       <v-col
         cols="12"
         :xs="12"
@@ -9,13 +9,18 @@
         :md="6"
         :xl="4"
         :lg="4"
-        v-for="n in data"
+        v-for="n in stats"
         :key="n.title"
       >
-        <v-card @click="onCardClick(n.title)" class="pa-1" dark :color="n.color">
+        <v-card
+          @click="onCardClick(n.title)"
+          class="pa-1"
+          dark
+          :color="n.color"
+        >
           <v-list-item three-line>
             <v-list-item-content class="pb-0">
-              <div class="overline mb-3">{{ n.title }}</div>
+              <div class="overline mb-3 font-weight-bold	">{{ n.title }}</div>
               <v-list-item-title class="headline mb-1">
                 {{ n.count }}
               </v-list-item-title>
@@ -69,7 +74,7 @@
         :items="desserts"
         :search="search"
         :options.sync="dataTableOptions"
-        @click:row="testRowclick"
+        @click:row="onItemRowclick"
       >
         <template v-slot:item.countryInfo="{ item }">
           <v-avatar :size="36" class="elevation-4">
@@ -113,8 +118,9 @@ export default {
   },
   computed: {
     ...mapGetters({
-      desserts: "getInfectedCountriesData",
-      isLoading: "isDataLoading"
+      desserts: "getCountriesData",
+      isLoading: "isDataLoading",
+      stats: "allStats"
     }),
     itemsPerPageOptions() {
       return this.showAll ? [-1] : [5, 10, 15, -1];
@@ -125,68 +131,18 @@ export default {
   },
 
   methods: {
-    testRowclick(e) {
-      const data = this.desserts.find(d => d.country === e.country);
+    onItemRowclick(e) {
+      const data = this.desserts.find((d) => d.country === e.country);
       this.$store.commit("toggleStatsModal", data);
       this.$gtag.event("toggleStatsModal", { country: data.country });
     },
     onCardClick(title) {
-      this.$router.push({ name: "Map", params: { title: title } });
+      this.$router.push({
+        name: "Map",
+        params: { title: title.toLowerCase() }
+      });
     },
-    async getData() {
-      try {
-        const response = await axios.get(`${process.env.VUE_APP_API}/all`);
-        const {
-          cases,
-          deaths,
-          recovered,
-          active,
-          updated,
-          todayCases,
-          todayDeaths
-        } = response.data;
-        const infected = {
-          title: "Infected",
-          color: "info",
-          count: new Intl.NumberFormat(navigator.language).format(
-            Number(cases)
-          ),
-          increase: Math.round((todayCases / cases) * 100)
-        };
-        this.updated = `Last updated on : ${new Date(updated).toDateString()}`;
-        const deathscases = {
-          title: "Deaths",
-          color: "error",
-          count: new Intl.NumberFormat(navigator.language).format(
-            Number(deaths)
-          ),
-          increase: Math.round((todayDeaths / deaths) * 100)
-        };
-        const recoveredcases = {
-          title: "Recovered",
-          color: "success",
-          count: new Intl.NumberFormat(navigator.language).format(
-            Number(recovered)
-          )
-        };
-        const activecases = {
-          title: "Active",
-          color: "orange",
-          count: new Intl.NumberFormat(navigator.language).format(
-            Number(active)
-          )
-        };
 
-        this.data = [
-          { ...infected },
-          { ...activecases },
-          { ...deathscases },
-          { ...recoveredcases }
-        ];
-      } catch (error) {
-        console.log(error);
-      }
-    },
     async getCountrywiseDate() {
       try {
         this.isLoading = true;
@@ -203,8 +159,8 @@ export default {
     }
   },
   mounted() {
-    this.getData();
     this.$store.dispatch("getCountrywiseData");
+    if (!this.stats) this.$store.dispatch("getAllStats");
   }
 };
 </script>

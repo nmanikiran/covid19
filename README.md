@@ -1,5 +1,7 @@
 # covid19
 
+This site will provide stats relate to corona-virus cases, information that WHO provided to fight against covoid19 in pictorial representation, symptoms checklist and many more
+
 ## Found this project useful?
 
 If you found this project useful, then please consider giving it a ⭐️ on Github and sharing it with your friends via social media.
@@ -56,6 +58,28 @@ I welcome and encourage all pull requests. It usually will take me within 24-48 
 ## Recommended / Preferred
 
 [VS Code](https://code.visualstudio.com/download)
+
+## Contributors
+
+<table>
+  <tr>
+    <td align="center"><a href="http://nmanikiran.com"><img src="https://avatars2.githubusercontent.com/u/3726349?s=460&v=4" width="100px;" alt="Mani Kiran"/><br /><sub><b>Mani Kiran N</b></sub></a><br />
+    <a href="#" title="Code">💻 </a>
+    <a href="#" title="Documentation">📖</a>
+    <a href="#" title="Ideas">🤔</a>
+    <a href="#" title="Reviewed Pull Requests">👀</a>
+    <a href="#" title="Maintenance">🚧 </a>
+    </td>
+    <td align="center"><a href="https://curioustushar.github.io/"><img src="https://avatars3.githubusercontent.com/u/12570521?v=4" width="100px;" alt="Tushar Gupta"/><br /><sub><b>Tushar Gupta</b></sub></a><br />
+    <a href="#" title="Code">💻 </a>
+    <a href="#" title="Answering Questions">💬 </a>
+    </td>
+    <td align="center"><a href="https://github.com/NivyaPallempati"><img src="https://avatars3.githubusercontent.com/u/36149369?s=460&u=b159f355ae5baf42ecd53db08ce091d1bc21aaea&v=4" width="100px;" alt="Nivya Pallempati"/><br /><sub><b>Nivya Pallempati</b></sub></a><br />
+    <a href="#" title="Code">💻 </a>
+    <a href="#" title="Answering Questions">💬 </a>
+    </td>
+  </tr>
+</table>
 
 ## Thanks & Credits to
 

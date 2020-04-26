@@ -14,16 +14,17 @@
         </v-layout>
         <v-list dense nav class="py-0">
           <v-list-item
-            v-for="item in navigationLinks"
-            :key="item.title"
-            :to="item.path"
+            v-for="link in navigationLinks"
+            :key="link.name"
+            exact
+            :to="link.path"
           >
             <v-list-item-icon>
-              <v-icon>{{ item.icon }}</v-icon>
+              <v-icon>{{ link.icon }}</v-icon>
             </v-list-item-icon>
 
             <v-list-item-content>
-              <v-list-item-title>{{ item.title }}</v-list-item-title>
+              <v-list-item-title>{{ link.name }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-list>

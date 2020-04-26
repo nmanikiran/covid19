@@ -1,7 +1,9 @@
 <template>
   <v-app-bar app temporary color="primary" dark>
     <div class="d-flex align-center">
-      <v-btn icon @click="toggleMenu"> <v-icon>mdi-menu</v-icon></v-btn>
+      <v-btn icon @click="toggleMenu" aria-label="menu">
+        <v-icon>mdi-menu</v-icon></v-btn
+      >
       <v-spacer v-if="!$vuetify.breakpoint.mdAndUp"></v-spacer>
       <v-btn to="/" icon>
         <img :src="logo" height="56" alt="covid19 logo" />
@@ -9,7 +11,7 @@
     </div>
 
     <v-spacer></v-spacer>
-    <v-btn icon exact to="/" class="mr-2">
+    <v-btn icon exact to="/" class="mr-2" aria-label="home">
       <v-icon>mdi-home</v-icon>
     </v-btn>
     <div v-if="$vuetify.breakpoint.mdAndUp">
@@ -20,7 +22,7 @@
         :to="link.path"
         :key="index"
       >
-        <span class="mr-2">{{ link.title }}</span>
+        <span class="mr-2">{{ link.name }}</span>
       </v-btn>
     </div>
   </v-app-bar>

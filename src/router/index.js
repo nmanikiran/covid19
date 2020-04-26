@@ -1,12 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Faq from "./../views/Faq.vue";
-import Info from "./../views/Info.vue";
-import WHO from "./../views/WHO.vue";
 import Home from "./../views/Home.vue";
-import LifeStyle from "./../views/LifeStyle.vue";
-import Symptoms from "./../views/Symptoms.vue";
-import Map from "./../views/Map.vue";
+import WHO from "./../views/WHO.vue";
 
 Vue.use(VueRouter);
 
@@ -21,8 +16,8 @@ const routes = [
   },
   {
     path: "/faq",
-    name: "faq",
-    component: Faq,
+    name: "FAQ",
+    component: () => import(/* webpackChunkName: "Faq" */ "./../views/Faq.vue"),
     meta: {
       title: "Questions & Answers | Covid19 Info"
     }
@@ -30,17 +25,19 @@ const routes = [
   {
     path: "/symptoms",
     name: "Symptoms",
-    component: Symptoms,
+    component: () =>
+      import(/* webpackChunkName: "Symptoms" */ "./../views/Symptoms.vue"),
     meta: {
       title: "Symptoms Checklist | Covid19 Info"
     }
   },
   {
     path: "/info",
-    name: "info",
-    component: Info,
+    name: "Info",
+    component: () =>
+      import(/* webpackChunkName: "Info" */ "./../views/Info.vue"),
     meta: {
-      title: "Information | Covid19 Info"
+      title: "Info | Covid19 Info"
     }
   },
   {
@@ -52,14 +49,12 @@ const routes = [
     }
   },
   {
-    path: "/life",
-    name: "Life",
-    component: LifeStyle
-  },
-  {
     path: "/map/:title",
     name: "Map",
-    component: Map
+    component: () => import(/* webpackChunkName: "Map" */ "./../views/Map.vue"),
+    meta: {
+      title: "Map View | Covid19 Info"
+    }
   }
 ];
 
@@ -74,7 +69,7 @@ router.beforeEach((to, from, next) => {
   const nearestWithTitle = to.matched
     .slice()
     .reverse()
-    .find(r => r.meta && r.meta.title);
+    .find((r) => r.meta && r.meta.title);
   if (nearestWithTitle) document.title = nearestWithTitle.meta.title;
   next();
 });

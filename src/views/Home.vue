@@ -12,7 +12,7 @@
         v-for="n in data"
         :key="n.title"
       >
-        <v-card class="pa-1" dark :color="n.color">
+        <v-card @click="onCardClick(n.title)" class="pa-1" dark :color="n.color">
           <v-list-item three-line>
             <v-list-item-content class="pb-0">
               <div class="overline mb-3">{{ n.title }}</div>
@@ -83,6 +83,7 @@
 
 <script>
 import axios from "axios";
+import { mapGetters } from "vuex";
 
 export default {
   data() {
@@ -95,7 +96,6 @@ export default {
       data: [],
       updated: "",
       search: "",
-      isLoading: false,
       headers: [
         {
           text: "#",
@@ -108,11 +108,17 @@ export default {
         { text: "Deaths", value: "deaths" },
         { text: "Active", value: "active" },
         { text: "Recovered", value: "recovered" }
-      ],
-      desserts: []
+      ]
     };
   },
   computed: {
+    ...mapGetters({
+      desserts: "getInfectedCountriesData",
+      isLoading: "isDataLoading"
+    }),
+    itemsPerPageOptions() {
+      return this.showAll ? [-1] : [5, 10, 15, -1];
+    },
     showAll() {
       return this.dataTableOptions.itemsPerPage === -1;
     }
@@ -120,9 +126,12 @@ export default {
 
   methods: {
     testRowclick(e) {
-      const data = this.desserts.find((d) => d.country === e.country);
+      const data = this.desserts.find(d => d.country === e.country);
       this.$store.commit("toggleStatsModal", data);
       this.$gtag.event("toggleStatsModal", { country: data.country });
+    },
+    onCardClick(title) {
+      this.$router.push({ name: "Map", params: { title: title } });
     },
     async getData() {
       try {
@@ -195,7 +204,7 @@ export default {
   },
   mounted() {
     this.getData();
-    this.getCountrywiseDate();
+    this.$store.dispatch("getCountrywiseData");
   }
 };
 </script>

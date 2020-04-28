@@ -45,13 +45,13 @@
     </vue-horizontal-list>
     <v-speed-dial
       v-model="fab"
-      direction="bottom"
+      direction="top"
       top
       right
       fixed
       transition="slide-x-transition"
       class="fab-speed-dial"
-      :style="{ 'margin-top': marginTop }"
+      :style="{ top: marginTop }"
     >
       <template v-slot:activator>
         <v-btn v-model="fab" color="blue darken-2" dark fab>
@@ -179,16 +179,26 @@ export default {
 </script>
 
 <style lang="scss">
+.vue-horizontal-list {
+  .vhl-item {
+    box-sizing: border-box;
+    padding: 0 1em !important;
+  }
+  .vhl-container {
+    margin: 0 !important;
+  }
+}
+
 .fab-speed-dial {
   z-index: 10000;
   display: inline-block;
 }
 .horizontalList {
-  margin-top: -182px !important;
+  margin-top: -150px !important;
 }
 .map-with-item-scroll {
-  min-height: 90vh !important;
-  margin: 0 calc(100% - 100vw);
+  min-height: 100vh !important;
+  margin: -12px calc(100% - 100vw);
 }
 .item {
   box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2), 0 4px 5px 0 rgba(0, 0, 0, 0.14),

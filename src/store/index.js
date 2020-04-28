@@ -117,7 +117,7 @@ export default new Vuex.Store({
           ),
           increase: Math.round((todayCases / cases) * 100)
         };
-        this.updated = `Last updated on : ${new Date(updated).toDateString()}`;
+
         const deathscases = {
           title: "Deaths",
           color: "error",
@@ -147,7 +147,10 @@ export default new Vuex.Store({
           { ...deathscases },
           { ...recoveredcases }
         ];
-        commit("setStats", data);
+        const updatedOn = `Last updated on : ${new Date(
+          updated
+        ).toDateString()}`;
+        commit("setStats", { data, updated: updatedOn });
       } catch (error) {
         console.log(error);
       }

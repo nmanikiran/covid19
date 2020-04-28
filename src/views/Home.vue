@@ -1,6 +1,6 @@
 <template>
   <v-container fluid>
-    <p class="text--secondary ma-0">{{ updated }}</p>
+    <p class="text--secondary ma-0">{{ stats.updated }}</p>
     <v-row v-if="stats">
       <v-col
         cols="12"
@@ -9,7 +9,7 @@
         :md="6"
         :xl="4"
         :lg="4"
-        v-for="n in stats"
+        v-for="n in stats.data"
         :key="n.title"
       >
         <v-card
